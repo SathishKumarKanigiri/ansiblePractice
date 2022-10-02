@@ -1,4 +1,4 @@
 # roles/common/tasks/main.yml
 - name: Create Sample File
-  import_tasks: create_sampleFile.yaml
+  import_tasks: create_sampleFile.yml
   when: ansible_facts['os_family']|lower == 'redhat'
