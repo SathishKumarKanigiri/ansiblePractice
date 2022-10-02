@@ -1,5 +1,5 @@
 ---
 - name: Create a file using touch command
-  shell: createFile.sh > log.txt
+  script: ../files/createFile.sh > log.txt
   args:
-    creates: log.txt
+    creates: log.txt,sampleFile.txt
