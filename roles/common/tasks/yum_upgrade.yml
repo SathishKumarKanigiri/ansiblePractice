@@ -1,0 +1,10 @@
+---
+- name: install packages using yum
+  hosts: others
+
+  tasks:
+  - name: upgrade yum
+    yum:
+      name=*
+      state=latest
+    become: yes

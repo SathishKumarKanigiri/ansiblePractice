@@ -1,0 +1,9 @@
+---
+- name: Create Sample File in All Servers
+- hosts: others
+
+  tasks:
+  - name: Create a file using touch command
+    shell: createFile.sh > log.txt
+    args:
+      creates: log.txt
