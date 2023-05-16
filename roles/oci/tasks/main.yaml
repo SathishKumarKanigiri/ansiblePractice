@@ -1,0 +1,29 @@
+---
+  - name: ensures /root/.oci dir exists
+    file: 
+      path: "/root/.oci"
+      state: directory
+  - name: Copy OCI Configs
+    ansible.builtin.copy:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      owner: root
+      group: root
+      mode: u=rw,g=r,o=r
+      follow: yes
+    loop:
+      - src: /root/.oci/config
+        dest: /root/.oci/config
+      - src: /root/.oci/oci_api_key_gbucdsint.pem
+        dest: /root/.oci/oci_api_key_gbucdsint.pem
+    become_user: root
+  
+  - name: Update Artstore
+    ansible.builtin.shell: |
+      curl --noproxy "*" -o /usr/local/bin/artstore https://artifacthub-phx.oci.oraclecorp.com/artifactory/sdaas-dev-local/artstore/artstore_linux_amd64_latest
+      chmod +x /usr/local/bin/artstore
+    args:
+      executable: /bin/bash
+    become_user: root
+    tags:
+      - artstore
